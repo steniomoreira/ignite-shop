@@ -1,1 +1,1 @@
-# ignite-shop
+# ignite-shop 2.0
