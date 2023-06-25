@@ -1,11 +1,22 @@
 import { styled } from "..";
 
 export const HomeContainer = styled('main', {
+    position: 'relative',
     display: 'flex',
     width: '100%',
     maxWidth: 'calc(100vw - ((100vw - 1180px) / 2))',
     marginLeft: 'auto',
     minHeight: 656,
+})
+
+export const ArrowContainer = styled('div', {
+    position: 'absolute',
+    width: '100%',
+    minHeight: 656,
+
+    display: "flex",
+    justifyContent: 'space-between',
+    alignItems: "center",   
 })
 
 export const Product = styled('div', {
@@ -18,6 +29,8 @@ export const Product = styled('div', {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+
+    zIndex: 10,
 
     img: {
         objectFit: 'cover',
@@ -40,7 +53,7 @@ export const Product = styled('div', {
 
         transform: 'translateY(110%)',
         opacity: 0,
-        transition: 'all 0.2s ease-in-out',
+        transition: 'all 0.2s ease-in-out',     
 
         strong: {
             fontSize: '$lg',
