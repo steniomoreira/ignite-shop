@@ -9,6 +9,8 @@ export const Container = styled('div', {
 })
 
 export const Header = styled('header',  {
+    position: "relative",
+
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
@@ -47,5 +49,76 @@ export const HandbagContainer = styled('div', {
         fontSize: '0.875rem',
         fontWeight: 700,
     }
+
+})
+
+export const Sidepanel = styled('aside', {
+    position: "absolute",
+    right: 0,
+
+    display: "flex",
+    justifyContent: "space-between",
+    flexDirection: "column",
+
+    background: '$gray800',
+
+    width: '100%',
+    maxWidth: 480,
+    height: '100%',
+
+    padding: 48,
+
+    zIndex: 100,
+
+    h2: {
+        fontSize: '1.25rem',
+        fontWeight: 700,
+        color: '$gray100',
+    }
+})
+
+export const SidepanelItemContainer = styled('div', {
+    display: "flex",
+    flexDirection: "column",
+    gap: '1.5rem',
+})
+
+export const SidepanelItem = styled('div', {
+    display: "flex",
+    gap: 20,
+
+    img: {
+        maxWidth: 100,
+        borderRadius: 8,
+    },
+
+    h2: {
+        fontSize: '1.125rem',
+        fontWeight: 400,
+        color: '$gray300',
+        lineHeight: '160%',
+
+        strong: {
+            display: 'block',
+            color: "$gray100",
+            fontWeight: 700,
+            marginTop: 2,
+        },
+    },
+
+    button: {
+        background: "transparent",
+        border: 0,
+        color: '$green500',
+        fontSize: '1rem',
+        fontWeight: 700,
+
+        height: 26,
+        marginTop: '0.5rem',
+    }
+
+})
+
+export const SidepanelFooter = styled('div', {
 
 })
