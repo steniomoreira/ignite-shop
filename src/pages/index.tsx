@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { GetStaticProps } from "next";
 import Image from "next/image";
 import Stripe from "stripe";
@@ -5,11 +6,11 @@ import { stripe } from "../lib/stripe";
 import { useKeenSlider } from 'keen-slider/react'
 import Link from "next/link";
 import Head from "next/head";
+import { Arrow } from "../components/Arrow";
+import { HandbagButton } from "../components/HandbagButton";
 import { ArrowContainer, HomeContainer, Product } from "../styles/pages/home";
 
 import 'keen-slider/keen-slider.min.css'
-import { useState } from "react";
-import { Arrow } from "../components/Arrow";
 
 interface HomeProps {
     products: {
@@ -48,16 +49,21 @@ export default function Home({products}: HomeProps) {
             <HomeContainer css={{maxWidth: currentSlide > 0 && '100%' }} >
                 <div ref={sliderRef} className="keen-slider">
                     {products.map(product => (
-                        <Link href={`/product/${product.id}`} key={product.id} prefetch={false} >
-                            <Product className="keen-slider__slide">
+                        <Product className="keen-slider__slide">
+                            <Link href={`/product/${product.id}`} key={product.id} prefetch={false} >
                                 <Image src={product.imageUrl} width={520} height={480} alt=""/>
-
-                                <footer>
+                            </Link>
+                            
+                            <footer>
+                                <Link href={`/product/${product.id}`} key={product.id} prefetch={false} >
                                     <strong>{product.name}</strong>
                                     <span>{product.price}</span>
-                                </footer>
-                            </Product>  
-                        </Link>
+                                </Link>
+
+                                <HandbagButton />
+
+                            </footer>
+                        </Product>  
                     ))}
                 </div>
 
