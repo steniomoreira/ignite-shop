@@ -45,19 +45,27 @@ export const Product = styled('div', {
 
         borderRadius: 6,
 
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
+        display: 'grid',
+        gridTemplateColumns: '1fr 56px',
 
         backgroundColor: 'rgba(0, 0, 0, 0.6)',
 
         transform: 'translateY(110%)',
         opacity: 0,
-        transition: 'all 0.2s ease-in-out',     
+        transition: 'all 0.2s ease-in-out',       
 
         strong: {
             fontSize: '$lg',
             color: '$gray100'
+        },
+        
+        a: {
+            display: 'flex',
+            justifyContent: 'flex-start',
+            flexDirection: 'column',
+            gap: '4px',
+            
+            textDecoration: 'none'
         },
 
         span: {
