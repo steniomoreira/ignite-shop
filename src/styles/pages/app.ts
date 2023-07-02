@@ -1,11 +1,14 @@
 import { styled } from "..";
 
 export const Container = styled('div', {
+    position: "relative",
     display: "flex",
     flexDirection: 'column',
     alignItems: 'flex-start',
     justifyContent: 'center',
     minHeight: '100vh',
+    
+    overflow: "hidden",
 })
 
 export const Header = styled('header',  {
@@ -66,15 +69,38 @@ export const Sidepanel = styled('aside', {
     maxWidth: 480,
     height: '100%',
 
-    padding: 48,
+    padding: "3rem",
 
     zIndex: 100,
 
+    transform: 'translateX(110%)',
+    opacity: 0,
+    transition: 'all 0.2s ease-in-out',
+    
+    variants: {
+        isOpen: {
+            true:{ opacity: 1, transform: 'translateX(0%)', },
+        },
+    },    
+
     h2: {
+        margin: '1.5rem 0 0.5rem',
         fontSize: '1.25rem',
         fontWeight: 700,
         color: '$gray100',
-    }
+    }    
+})
+
+export const SidepanelClose = styled('button', {
+    position: "absolute",
+    top: '1.5rem',
+    right: '1.5rem',
+
+    background: 'none',
+    color: "$gray500",
+    border: 0,
+
+    cursor: "pointer",
 })
 
 export const SidepanelItemContainer = styled('div', {
@@ -120,5 +146,41 @@ export const SidepanelItem = styled('div', {
 })
 
 export const SidepanelFooter = styled('div', {
+    
+    ul: {
+        width: '100%',                   
 
+        li: {
+            display: 'flex',
+            marginTop: '1rem',
+            
+
+            strong: {
+                flex: 1,
+                textAlign: 'right',
+                fontSize: '1.125rem',
+                fontWeight: 400,               
+            },       
+            
+            
+            '&:last-child ': {
+                fontSize: '1.125rem',
+                fontWeight: 700,
+                
+                strong: {
+                    fontSize: '1.5rem',
+                    fontWeight: 700,
+                }
+            }
+        },
+
+      
+
+
+    },
+
+    button: {
+        marginTop: '3.125rem',
+        width: '100%',
+    }
 })

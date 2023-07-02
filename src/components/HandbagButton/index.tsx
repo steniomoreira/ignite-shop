@@ -8,7 +8,7 @@ interface HandbagButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 export function HandbagButton({ ...props }: HandbagButtonProps) {
   return (
-    <ButtonContainer color={props.color}>
+    <ButtonContainer color={props.color} {...props}>
       <Handbag size={32} />
     </ButtonContainer>
   )

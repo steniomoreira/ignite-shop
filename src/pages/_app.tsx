@@ -1,14 +1,24 @@
+import { useState } from 'react';
 import type { AppProps } from 'next/app'
+import { X } from "@phosphor-icons/react";
 import Image from 'next/image';
 import { HandbagButton } from '../components/HandbagButton';
+import { Button } from '../components/Button';
 
+import { Container, HandbagContainer, Header, Sidepanel, SidepanelClose, SidepanelFooter, SidepanelItem, SidepanelItemContainer } from '../styles/pages/app'
 import { globalStyle } from '../styles/global'
-import { Container, HandbagContainer, Header, Sidepanel, SidepanelItem, SidepanelItemContainer } from '../styles/pages/app'
 
 import logoImg from '../assets/logo.svg'
+
 globalStyle()
 
 export default function App({ Component, pageProps }: AppProps) {
+  const [isOpen, setIsOpen] = useState(false)
+
+  function toggleOpen() {
+    setIsOpen(prev => !prev)
+  }
+
   return (
     <Container>        
         <Header>
@@ -16,14 +26,18 @@ export default function App({ Component, pageProps }: AppProps) {
 
             <HandbagContainer>
               <span>1</span>
-              <HandbagButton color='gray' />
+              <HandbagButton color='gray' onClick={toggleOpen}  />
             </HandbagContainer>            
         </Header>
         
-        <Sidepanel>
-          <h2>Sacola de compras</h2>
+        <Sidepanel isOpen={isOpen}>
+          <SidepanelClose onClick={toggleOpen} >
+            <X size={24} />
+          </SidepanelClose>
 
           <SidepanelItemContainer>
+           <h2>Sacola de compras</h2>
+
             <SidepanelItem>
               <img src="https://placehold.co/100x90/121214/c4c4cc" alt="" />
               <span>
@@ -58,6 +72,23 @@ export default function App({ Component, pageProps }: AppProps) {
               </span>
             </SidepanelItem>
           </SidepanelItemContainer>
+
+          <SidepanelFooter>
+            <ul>
+              <li>
+                Quantidade
+                <strong>3 itens</strong>
+              </li>
+              <li>
+                Valor total
+                <strong>R$ 270,00</strong>
+              </li>
+            </ul>
+
+            <Button onClick={() =>{}} >
+              Finalizar compra
+            </Button>
+          </SidepanelFooter>
         </Sidepanel>
 
         <Component {...pageProps} />

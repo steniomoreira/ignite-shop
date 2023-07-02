@@ -7,6 +7,7 @@ import Image from "next/image";
 import axios from "axios";
 import { useState } from "react";
 import Head from "next/head";
+import { Button } from "../../components/Button";
 
 interface ProductProps {
     product: {
@@ -21,6 +22,7 @@ interface ProductProps {
 
 export default function Product({ product }: ProductProps) {
     const [isCreatingCheckoutSession, setIsCreatingCheckoutSession ] = useState(false)
+
     async function handleBuyProduct() {
         try {
             setIsCreatingCheckoutSession(true);
@@ -53,8 +55,11 @@ export default function Product({ product }: ProductProps) {
                     <h1>{product.name}</h1>
                     <span>{product.price}</span>
                     <p>{product.description}</p>
-                
-                    <button onClick={handleBuyProduct} disabled={isCreatingCheckoutSession}>Comprar agora</button>
+
+                    <Button onClick={handleBuyProduct} disabled={isCreatingCheckoutSession}>
+                        Colocar na sacola
+                    </Button>
+               
                 </ProductDetails>
             </ProductContainer>
         </>
