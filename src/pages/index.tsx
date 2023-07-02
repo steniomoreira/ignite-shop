@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { MouseEvent, useState } from "react";
 import { GetStaticProps } from "next";
 import Image from "next/image";
 import Stripe from "stripe";
@@ -7,18 +7,20 @@ import { useKeenSlider } from 'keen-slider/react'
 import Link from "next/link";
 import Head from "next/head";
 import { Arrow } from "../components/Arrow";
-import { HandbagButton } from "../components/HandbagButton";
+import { CartButton } from "../components/Cart/CartButton";
 import { ArrowContainer, HomeContainer, Product } from "../styles/pages/home";
 
 import 'keen-slider/keen-slider.min.css'
 
+type Product = {
+    id: string,
+    name: string,
+    imageUrl: string,
+    price: string,
+}
+
 interface HomeProps {
-    products: {
-        id: string,
-        name: string,
-        imageUrl: string,
-        price: string,
-    }[]
+    products: Product[]
 }
 
 export default function Home({products}: HomeProps) {
@@ -38,7 +40,12 @@ export default function Home({products}: HomeProps) {
         created() {
           setLoaded(true)
         },
-    })    
+    })
+
+    function handleAddItemCart(event: MouseEvent<HTMLButtonElement>, productID: Product ) {
+        event.preventDefault();
+        console.log(productID);
+    }
 
     return (
         <>
@@ -49,21 +56,21 @@ export default function Home({products}: HomeProps) {
             <HomeContainer css={{maxWidth: currentSlide > 0 && '100%' }} >
                 <div ref={sliderRef} className="keen-slider">
                     {products.map(product => (
-                        <Product className="keen-slider__slide">
-                            <Link href={`/product/${product.id}`} key={product.id} prefetch={false} >
-                                <Image src={product.imageUrl} width={520} height={480} alt=""/>
-                            </Link>
-                            
-                            <footer>
-                                <Link href={`/product/${product.id}`} key={product.id} prefetch={false} >
-                                    <strong>{product.name}</strong>
-                                    <span>{product.price}</span>
-                                </Link>
+                        <Link href={`/product/${product.id}`} key={product.id} prefetch={false} >
+                            <Product className="keen-slider__slide">
+                                <Image src={product.imageUrl} width={520} height={480} alt=""/>                               
+                                
+                                <footer>
+                                    <p>
+                                        <strong>{product.name}</strong>
+                                        <span>{product.price}</span>
+                                    </p>
 
-                                <HandbagButton />
+                                    <CartButton onClick={(event) => handleAddItemCart(event, product)}/>
 
-                            </footer>
-                        </Product>  
+                                </footer>
+                            </Product>  
+                        </Link>
                     ))}
                 </div>
 

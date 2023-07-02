@@ -16,7 +16,7 @@ export const ButtonContainer = styled('button', {
     cursor: 'not-allowed'
   },
 
-  '&:not(:disabled)hover': {
+  '&:not(:disabled):hover': {
     backgroundColor: '$green300',
   } 
 })

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ImageContainer, SuccessContainer } from "../styles/pages/success";
+import { ImageContainer, ImageWrapper, SuccessContainer } from "../styles/pages/success";
 import { GetServerSideProps } from "next";
 import { stripe } from "../lib/stripe";
 import Stripe from "stripe";
@@ -23,14 +23,22 @@ export default function Success({ customerName, product }: SuccessProps) {
             </Head>
 
             <SuccessContainer>
-                <h1>Comprar efetuada!</h1>
-
                 <ImageContainer>
-                    <Image src={product.imageUrl} width={120} height={110} alt="" />
+                    <ImageWrapper>
+                        <Image src={product.imageUrl} width={120} height={120} alt="" />
+                    </ImageWrapper>
+                    <ImageWrapper>
+                        <Image src={product.imageUrl} width={120} height={120} alt="" />
+                    </ImageWrapper>
+                    <ImageWrapper>
+                        <Image src={product.imageUrl} width={120} height={120} alt="" />
+                    </ImageWrapper>
                 </ImageContainer>
 
+                <h1>Compra efetuada!</h1>
+
                 <p>
-                    Uhuul <strong>{customerName}</strong>, sua <strong>{product.name}</strong> já está a caminho de sua casa.
+                    Uhuul <strong>{customerName}</strong>, sua compra de 3 camisetas já está a caminho de sua casa.
                 </p>
 
                 <Link href='/'>
