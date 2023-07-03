@@ -40,7 +40,10 @@ export const ImageContainer = styled('div', {
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  marginLeft: '52px',
+
+  'div + div': {
+    marginLeft: '-52px',
+  }
 })
 
 export const ImageWrapper = styled('div', { 
@@ -50,7 +53,6 @@ export const ImageWrapper = styled('div', {
   boxShadow: '0px 0px 60px 0px rgba(0, 0, 0, 0.80)',
   borderRadius: '50%',
   padding: '0.25rem',
-  marginLeft: '-52px',
 
   display: 'flex',
   justifyContent: 'center',
@@ -58,5 +60,5 @@ export const ImageWrapper = styled('div', {
 
   img: {
     objectFit: 'cover',
-  }
+  }  
 })

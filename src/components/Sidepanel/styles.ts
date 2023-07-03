@@ -58,14 +58,25 @@ export const SidepanelClose = styled('button', {
     cursor: "pointer",
 })
 
-export const SidepanelItem = styled('div', {
-    display: "flex",
-    gap: 20,
+export const SidepanelImageContainer = styled('div',  {
+    width: 100,
+    height: 93,
+    background: 'linear-gradient(180deg, #1ea482 0%, #7465d4 100%)',
+    borderRadius: 8,
+
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
 
     img: {
+        objectFit: 'cover',
         maxWidth: 100,
-        borderRadius: 8,
-    },  
+    }
+})
+
+export const SidepanelItem = styled('div', {
+    display: "flex",
+    gap: 20,   
 
     span: {
         display: "flex",

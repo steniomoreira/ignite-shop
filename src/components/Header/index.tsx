@@ -1,10 +1,10 @@
 import Image from "next/image";
-import { HeaderContainer } from "./styles";
-
 import logoImg from '../../assets/logo.svg'
 import Link from "next/link";
 import { Cart } from "../Cart";
 import { useRouter } from "next/router";
+
+import { HeaderContainer } from "./styles";
 
 export function Header() {
   const { pathname } = useRouter();
