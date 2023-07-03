@@ -50,29 +50,29 @@ export const Product = styled('div', {
 
         backgroundColor: 'rgba(0, 0, 0, 0.6)',
 
-        transform: 'translateY(110%)',
-        opacity: 0,
-        transition: 'all 0.2s ease-in-out',       
-
-        strong: {
-            fontSize: '$lg',
-            color: '$gray100'
-        },
+        transform: 'translateY(0%)',
+        opacity: 1,
+        transition: 'all 0.2s ease-in-out',        
         
-        a: {
+        p: {
             display: 'flex',
             justifyContent: 'flex-start',
             flexDirection: 'column',
             gap: '4px',
             
-            textDecoration: 'none'
-        },
+            textDecoration: 'none',
 
-        span: {
-            fontSize: '$xl',
-            fontWeight: 'bold',
-            color: '$green300',
-        }
+            strong: {
+                fontSize: '$lg',
+                color: '$gray100'
+            },
+
+            span: {
+                fontSize: '$xl',
+                fontWeight: 'bold',
+                color: '$green300',
+            }
+        },        
     },
 
     '&:hover': {

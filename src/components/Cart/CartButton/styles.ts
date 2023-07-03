@@ -1,6 +1,6 @@
-import { styled} from '../../styles';
+import { styled} from '../../../styles';
 
-export const ButtonContainer = styled('button', {
+export const CartButtonContainer = styled('button', {
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
@@ -23,12 +23,21 @@ export const ButtonContainer = styled('button', {
 
       gray: {
         background: '$gray800',
-        color: '$gray300',
+        color: '$gray500',
       },
     },
   },
 
   defaultVariants: {
     color: 'green'
-  }
+  },
+  
+  '&:disabled': {
+    opacity: 0.7,
+    cursor: 'not-allowed'
+  },
+
+  '&:not(:disabled):hover': {
+    color: '$gray300',
+  },
 })

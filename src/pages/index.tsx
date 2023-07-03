@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { MouseEvent, useState } from "react";
 import { GetStaticProps } from "next";
 import Image from "next/image";
 import Stripe from "stripe";
@@ -7,23 +7,22 @@ import { useKeenSlider } from 'keen-slider/react'
 import Link from "next/link";
 import Head from "next/head";
 import { Arrow } from "../components/Arrow";
-import { HandbagButton } from "../components/HandbagButton";
+import { CartButton } from "../components/Cart/CartButton";
 import { ArrowContainer, HomeContainer, Product } from "../styles/pages/home";
+import { Product as ProductType } from "../types/productType";
+import { useCart } from "../hooks/useCart";
 
 import 'keen-slider/keen-slider.min.css'
 
 interface HomeProps {
-    products: {
-        id: string,
-        name: string,
-        imageUrl: string,
-        price: string,
-    }[]
+    products: ProductType[]
 }
 
 export default function Home({products}: HomeProps) {
     const [currentSlide, setCurrentSlide] = useState(0)
-    const [loaded, setLoaded] = useState(false)   
+    const [loaded, setLoaded] = useState(false)
+
+    const { addCartItem, verifyExistsInCart} = useCart()
 
     const [sliderRef, instanceRef] = useKeenSlider({
         slides: {
@@ -38,7 +37,12 @@ export default function Home({products}: HomeProps) {
         created() {
           setLoaded(true)
         },
-    })    
+    })
+
+    function handleAddItemCart(event: MouseEvent<HTMLButtonElement>, product: ProductType ) {
+        event.preventDefault();
+        addCartItem(product);
+    }
 
     return (
         <>
@@ -49,21 +53,24 @@ export default function Home({products}: HomeProps) {
             <HomeContainer css={{maxWidth: currentSlide > 0 && '100%' }} >
                 <div ref={sliderRef} className="keen-slider">
                     {products.map(product => (
-                        <Product className="keen-slider__slide">
-                            <Link href={`/product/${product.id}`} key={product.id} prefetch={false} >
-                                <Image src={product.imageUrl} width={520} height={480} alt=""/>
-                            </Link>
-                            
-                            <footer>
-                                <Link href={`/product/${product.id}`} key={product.id} prefetch={false} >
-                                    <strong>{product.name}</strong>
-                                    <span>{product.price}</span>
-                                </Link>
+                        <Link href={`/product/${product.id}`} key={product.id} prefetch={false} >
+                            <Product className="keen-slider__slide">
+                                <Image src={product.imageUrl} width={520} height={480} alt=""/>                               
+                                
+                                <footer>
+                                    <p>
+                                        <strong>{product.name}</strong>
+                                        <span>{product.price}</span>
+                                    </p>
 
-                                <HandbagButton />
+                                    <CartButton 
+                                        onClick={(event) => handleAddItemCart(event, product)}
+                                        disabled={verifyExistsInCart(product.id)}
+                                    />
 
-                            </footer>
-                        </Product>  
+                                </footer>
+                            </Product>  
+                        </Link>
                     ))}
                 </div>
 
@@ -93,7 +100,7 @@ export default function Home({products}: HomeProps) {
 export const getStaticProps: GetStaticProps = async () => {
     const response = await stripe.products.list({
         expand: ['data.default_price']
-    })
+    })    
     
     const products = response.data.map(product => {
 
@@ -107,6 +114,9 @@ export const getStaticProps: GetStaticProps = async () => {
                 style: 'currency',
                 currency: 'BRL'
             }).format(price.unit_amount as number / 100),
+            numberPrice: price.unit_amount / 100,
+            description: product.description,
+            defaultPriceId: price.id,
         }
     })
 
